@@ -4,7 +4,6 @@ export default class SearchResult {
     page: Page;
     private searchLct: Locator;
 
-
     constructor(page: Page) {
         this.page = page;
         this.searchLct = this.page.getByPlaceholder('İstasyon Ara');

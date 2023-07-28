@@ -8,7 +8,6 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('Ana sayfa', () => {
   test('has title', async ({ page }) => {
-
     await expect(page).toHaveTitle("Ana Sayfa | Sunpet");
   });
 
@@ -31,22 +30,21 @@ test.describe('Ana sayfa', () => {
 
   });
 
-  test('can search other stations', async ({ page }) => {
+  test('can search other stations', async ({ browser, page }) => {
     const homePage = new Homepage(page);
     const searchResultPage = new SearchResult(page);
+    browser.newContext();
     await homePage.clickAcceptAll();
     await homePage.selectStateAndDistrict('İstanbul');
     await homePage.clickGoruntuleBtn();
+    await page.waitForTimeout(2000);
     await searchResultPage.seeOtherStations(4);
 
   });
 
-
-
-
 });
 
-test.afterAll(async ({ page }) => {
+test.afterEach(async ({ page }) => {
   console.log('Test execution is done');
   await page.close();
 });
