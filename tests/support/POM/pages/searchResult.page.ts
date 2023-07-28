@@ -11,15 +11,11 @@ export default class SearchResult {
     }
 
     public async searchStations(elementName: string) {
-
         await this.searchLct.fill(elementName);
     }
 
     public async seeOtherStations(indexNumber: number) {
-
         const otherStatesLct = await this.page.locator('.content-item > ul >li').all();
-
         await otherStatesLct[indexNumber].click();
-
     }
 }
