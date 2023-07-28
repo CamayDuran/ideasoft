@@ -11,7 +11,7 @@ test('has title', async ({ page }) => {
   await homePage.selectStateAndDistrict();
   await homePage.clickGoruntuleBtn();
   await expect(page).toHaveURL(/agri/);
-  await page.pause();
+ 
 });
 
 
