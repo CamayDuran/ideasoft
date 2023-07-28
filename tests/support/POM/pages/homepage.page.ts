@@ -1,31 +1,30 @@
-import { expect, Page } from '@playwright/test';
+import { expect, type Locator, type Page } from '@playwright/test';
 
 export default class Homepage {
     page: Page;
+    acceptAllBtnLct: Locator;
+    ilLocator: Locator;
+    goruntuleBtnLct: Locator;
 
     constructor(page: Page) {
         this.page = page;
-    }
-
-    public async goTo() {
-        await this.page.goto('/');
+        this.acceptAllBtnLct = page.getByRole('button', { name: 'Tümünü Onayla' });
+        this.ilLocator = page.getByText('İl Seçinizİl Seçiniz');
+        this.goruntuleBtnLct = page.getByRole('button', { name: 'Görüntüle' });
     }
 
     public async clickAcceptAll() {
-        const acceptAllBtnLct = this.page.getByRole('button', { name: 'Tümünü Onayla' });
-        await acceptAllBtnLct.click();
+        await this.acceptAllBtnLct.click();
     }
 
-    public async selectStateAndDistrict(){
-       const ilLocator =  this.page.getByText('İl Seçinizİl Seçiniz');
-       const ilceLocator = this.page.getByRole('option', { name: 'Ağrı' })
-       await ilLocator.click();
-       await ilceLocator.click();
+    public async selectStateAndDistrict(elementName: string) {
+        await this.ilLocator.click();
+        const ilceLocator = this.page.getByRole('option', { name: elementName }).click();
+
     }
 
-    public async clickGoruntuleBtn(){
-        const goruntuleBtnLct = this.page.getByRole('button', { name: 'Görüntüle' });
-        await goruntuleBtnLct.click();
+    public async clickGoruntuleBtn() {
+        await this.goruntuleBtnLct.click();
 
     }
 
