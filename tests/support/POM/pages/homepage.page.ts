@@ -1,29 +1,50 @@
-import { type Locator, type Page } from '@playwright/test';
+import { type Page } from '@playwright/test';
 
 export default class Homepage {
     page: Page;
-    private acceptAllBtnLct: Locator;
-    private ilLocator: Locator;
-    private goruntuleBtnLct: Locator;
 
     constructor(page: Page) {
         this.page = page;
-        this.acceptAllBtnLct = page.getByRole('button', { name: 'Tümünü Onayla' });
-        this.ilLocator = page.getByText('İl Seçinizİl Seçiniz');
-        this.goruntuleBtnLct = page.getByRole('button', { name: 'Görüntüle' });
     }
 
+    acceptAllBtnLct = () => this.page.getByRole('button', { name: 'Tümünü Onayla' });
+    ilLocator = () => this.page.getByText('İl Seçinizİl Seçiniz');
+    goruntuleBtnLct = () => this.page.getByRole('button', { name: 'Görüntüle' });
+    tumunuGorBtnLct = () => this.page.getByRole('link', { name: 'Tümünü Gör ' });
+    searchTextFieldLct = () => this.page.getByPlaceholder('Arama');
+
+
     public async clickAcceptAll() {
-        await this.acceptAllBtnLct.click();
+        await this.acceptAllBtnLct().click();
     }
 
     public async selectStateAndDistrict(elementName: string) {
-        await this.ilLocator.click();
+        await this.ilLocator().click();
         const ilceLocator = this.page.getByRole('option', { name: elementName }).click();
     }
 
     public async clickGoruntuleBtn() {
-        await this.goruntuleBtnLct.click();
+        await this.goruntuleBtnLct().click();
+    }
+
+    public async clickTumunuGorBtn() {
+        const [newtab] = await Promise.all([
+            this.page.waitForEvent("popup"),
+            this.tumunuGorBtnLct().click(),
+        ]);
+        return newtab;
+        // await this.tumunuGorBtnLct().click();
+    }
+
+    public async clickSearchBtn() {
+        const all = await this.page.locator('.search-btn').all();
+        await all[1].click();
+    }
+
+    public async search() {
+        await this.searchTextFieldLct().fill('Bayilik Formu');
+        await this.searchTextFieldLct().press('Enter');
+
     }
 
 
