@@ -12,6 +12,8 @@ export default class Homepage {
     goruntuleBtnLct = () => this.page.getByRole('button', { name: 'Görüntüle' });
     tumunuGorBtnLct = () => this.page.getByRole('link', { name: 'Tümünü Gör ' });
     searchTextFieldLct = () => this.page.getByPlaceholder('Arama');
+    iletisimLct = () => this.page.getByRole('link', { name: 'İletişim' });
+    contactFormLct = () => this.page.getByRole('banner').getByRole('link', { name: 'Öneri ve Şikayetler' });
 
 
     public async clickAcceptAll() {
@@ -45,6 +47,11 @@ export default class Homepage {
         await this.searchTextFieldLct().fill('Bayilik Formu');
         await this.searchTextFieldLct().press('Enter');
 
+    }
+
+    public async clickContactBtn(){
+        await this.iletisimLct().hover();
+        await this.contactFormLct().click();
     }
 
 

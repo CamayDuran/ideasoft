@@ -3,6 +3,8 @@ import Homepage from './support/POM/pages/homePage.page';
 import SearchResult from './support/POM/pages/searchResult.page';
 import ResultPage from './support/POM/pages/resultPage.page';
 import SearchPage from './support/POM/pages/searchPage.page';
+import ApplicationPage from './support/POM/pages/applicationPage.page';
+import ContactFormPage from './support/POM/pages/contactFormPage.page';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
@@ -73,10 +75,11 @@ test.describe('HomePage Test Cases', () => {
     }).toPass();
   })
 
-  test('Search Bayilik Başvuru Formu and send application form', async ({ page }) => {
+  test('Search "Bayilik Başvuru Formu" and send application form', async ({ page }) => {
     await expect(async () => {
       const homePage = new Homepage(page);
       const searchPage = new SearchPage(page);
+      const applicationPage = new ApplicationPage(page);
 
       await test.step('Accept cookies', async () => {
         await homePage.clickAcceptAll();
@@ -101,14 +104,43 @@ test.describe('HomePage Test Cases', () => {
       })
 
       await test.step('Fill and send the application form', async () => {
-        await searchPage.fillFormInformations();
-        await searchPage.clickSendButton();
+        await applicationPage.fillFormInformations();
+        await applicationPage.clickSendButton();
       })
 
       await test.step('Assert that application form is successfully sent', async () => {
-        await expect(searchPage.successTxtLct()).toHaveText('Form başarıyla gönderildi');
+        await expect(applicationPage.successTxtLct()).toHaveText('Form başarıyla gönderildi');
       })
     }).toPass();
+  })
+
+  test.only('Send contact form', async ({ page }) => {
+    await expect(async () => {
+      const homePage = new Homepage(page);
+      const contactFormPage = new ContactFormPage(page);
+
+      await test.step('Accept cookies', async () => {
+        await homePage.clickAcceptAll();
+      })
+
+      await test.step('Hover to "İletişim" and click "Öneri ve Şikayetler" button ', async () => {
+        await homePage.clickContactBtn();
+      })
+
+      await test.step('Fill and send the contact form ', async () => {
+        await contactFormPage.fillFormInformations();
+        await page.pause();
+        await contactFormPage.clickSendButton();
+      })
+
+      await test.step('Assert that application form is successfully sent', async () => {
+        await expect(contactFormPage.successTxtLct()).toHaveText('Form başarıyla gönderildi');
+      })
+    }).toPass();
+
+
+
+
   })
 
 
