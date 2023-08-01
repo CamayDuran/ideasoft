@@ -1,10 +1,11 @@
 import { test, expect } from '@playwright/test';
-import Homepage from './support/POM/pages/homePage.page';
+import Homepage from './support/POM/pages/Homepage.page';
 import SearchResult from './support/POM/pages/searchResult.page';
 import ResultPage from './support/POM/pages/resultPage.page';
 import SearchPage from './support/POM/pages/searchPage.page';
 import ApplicationPage from './support/POM/pages/applicationPage.page';
 import ContactFormPage from './support/POM/pages/contactFormPage.page';
+
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
