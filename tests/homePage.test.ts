@@ -114,7 +114,7 @@ test.describe('HomePage Test Cases', () => {
     }).toPass();
   })
 
-  test.only('Send contact form', async ({ page }) => {
+  test('Send contact form', async ({ page }) => {
     await expect(async () => {
       const homePage = new Homepage(page);
       const contactFormPage = new ContactFormPage(page);
