@@ -137,13 +137,7 @@ test.describe('HomePage Test Cases', () => {
         await expect(contactFormPage.successTxtLct()).toHaveText('Form başarıyla gönderildi');
       })
     }).toPass();
-
-
-
-
   })
-
-
 });
 
 test.afterEach(async ({ page }) => {
