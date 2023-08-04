@@ -130,7 +130,6 @@ test.describe('HomePage Test Cases', () => {
 
       await test.step('Fill and send the contact form ', async () => {
         await contactFormPage.fillFormInformations();
-        await page.pause();
         await contactFormPage.clickSendButton();
       })
 
