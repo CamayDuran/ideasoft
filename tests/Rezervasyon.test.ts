@@ -57,7 +57,7 @@ test.beforeEach(async ({ page }) => {
   })
   
 
-test.afterEach(async ({ page }) => {
-  console.log('Test execution is done');
-  await page.close();
-});
+// test.afterEach(async ({ page }) => {
+//   console.log('Test execution is done');
+//   await page.close();
+// });
