@@ -1,4 +1,4 @@
-import { test as base, expect } from '@playwright/test';
+import { test as base } from '@playwright/test';
 import Rezervasyonpage from '../PageObjects/rezervasyon.page';
 
 interface PageObjects {
@@ -6,7 +6,7 @@ interface PageObjects {
 }
 
 export const test = base.extend<PageObjects>({
-    rezervasyonPage: async ({ page, context }, use) => {
+    rezervasyonPage: async ({ page }, use) => {
         await use(new Rezervasyonpage(page));
     },
     
