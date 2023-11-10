@@ -1,0 +1,10 @@
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="44.284293">
+<testsuite name="Rezervasyon.test.ts" timestamp="2023-11-10T11:02:35.449Z" hostname="chromium" tests="1" failures="0" skipped="0" time="43.111" errors="0">
+<testcase name="Login with correct email and passwords" classname="Rezervasyon.test.ts" time="43.111">
+<system-out>
+<![CDATA[Test execution is done
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
